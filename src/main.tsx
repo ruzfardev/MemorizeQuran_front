@@ -10,31 +10,32 @@ import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
 import { Notifications } from "@mantine/notifications";
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <MantineProvider
-        theme={{
-          primaryColor: "teal",
-          primaryShade: 5,
-          colors: {
-            teal: [
-              "#EAF2F3",
-              "#BFD7D9",
-              "#9FC4C6",
-              "#74A9AC",
-              "#59989C",
-              "#2F7E83",
-              "#2B7377",
-              "#21595D",
-              "#1A4548",
-              "#143537",
-            ],
-          },
-        }}
-      >
-        <Notifications position="top-center" />
-        <App />
-      </MantineProvider>
-    </BrowserRouter>
-  </StrictMode>
+  // <StrictMode>
+  <BrowserRouter>
+    <MantineProvider
+      theme={{
+        primaryColor: "teal",
+        fontFamily: "Roboto Flex",
+        primaryShade: 5,
+        colors: {
+          teal: [
+            "#EAF2F3",
+            "#BFD7D9",
+            "#9FC4C6",
+            "#74A9AC",
+            "#59989C",
+            "#2F7E83",
+            "#2B7377",
+            "#21595D",
+            "#1A4548",
+            "#143537",
+          ],
+        },
+      }}
+    >
+      <Notifications position="top-center" />
+      <App />
+    </MantineProvider>
+  </BrowserRouter>
+  // </StrictMode>
 );

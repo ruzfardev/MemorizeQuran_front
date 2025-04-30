@@ -17,6 +17,7 @@ export interface Issue {
   repetitionCount: number;
   durationMinutes: number;
   dateLearned: string;
+  notifyAt: string;
   from: number;
   to: number;
   surahId: number;
@@ -28,6 +29,7 @@ export interface PostIssue {
   surahId: number | null;
   from: number;
   to: number;
+  notifyAt: string;
   dateLearned: string;
   durationMinutes: number;
   repetitionCount: number;

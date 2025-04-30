@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import basiSsl from "@vitejs/plugin-basic-ssl";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
 export default defineConfig({
@@ -12,5 +13,5 @@ export default defineConfig({
     host: true,
     port: 5180,
   },
-  plugins: [react(), tsconfigPaths()],
+  plugins: [react(), basiSsl(), tsconfigPaths()],
 });

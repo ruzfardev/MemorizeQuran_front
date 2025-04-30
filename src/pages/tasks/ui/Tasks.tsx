@@ -119,9 +119,9 @@ const Page = () => {
       w="100%"
       pt={50}
       bg="#F6FAFC"
-      h="calc(100vh - 90px)"
+      h="calc(100vh - 70px)"
     >
-      <Box p={10} mih="50%" h="50%">
+      <Box p={10} mih="60%">
         {isLoadingPlanForMonth ? (
           <Flex direction="column" w="100%" gap={5}>
             <Flex gap={10} justify="space-between">
@@ -156,6 +156,7 @@ const Page = () => {
           </Flex>
         ) : (
           <DatePicker
+            firstDayOfWeek={1}
             date={selectedDate}
             onDateChange={handleDateChange}
             minDate={new Date("2024-01-01")}
@@ -173,9 +174,9 @@ const Page = () => {
         `}
         labelPosition="center"
       />
-      <Flex direction="column" gap={10} px={20} w="100%" mih="40%" h="50%">
+      <Flex direction="column" gap={10} px={20} w="100%" h="30%">
         {isLoadingPlanForDay
-          ? Array.from({ length: 8 }).map((_, index) => (
+          ? Array.from({ length: 3 }).map((_, index) => (
               <Skeleton key={index} h={120} width="100%" />
             ))
           : plansForDay.map((plan) => (

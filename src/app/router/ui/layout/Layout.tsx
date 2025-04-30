@@ -1,4 +1,4 @@
-import { $currentUser } from "@/shared/state";
+import { $telegramId } from "@/shared/state";
 import { Icon } from "@/shared/ui";
 import { AppShell, Button, Flex, LoadingOverlay, rem } from "@mantine/core";
 import { useUnit } from "effector-react";
@@ -39,6 +39,7 @@ const navbar = [
 export const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [telegramId] = useUnit([$telegramId]);
   const handleRouting = (route: string) => {
     navigate(route);
   };
@@ -69,8 +70,10 @@ export const Layout = () => {
               key={index}
               onClick={() => handleRouting(item.link)}
               variant="transparent"
+              disabled={!item.enabled || !telegramId}
+              bg="transparent"
               c={
-                location.pathname === item.link
+                telegramId && location.pathname === item.link
                   ? "var(--mantine-primary-color-filled)"
                   : "var(--mantine-color-gray-5)"
               }

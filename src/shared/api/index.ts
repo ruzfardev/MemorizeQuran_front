@@ -18,6 +18,15 @@ export const getUser = async (telegramId: number): Promise<User> => {
   return response.data.result;
 };
 
+export const isUserExist = async (telegramId: number): Promise<boolean> => {
+  const response = await api.get("/User", {
+    params: {
+      telegramId,
+    },
+  });
+  return response.data.result.isExisting;
+};
+
 export const postUser = async (body: any): Promise<{ id: number }> => {
   const response = await api.post("/User", {
     telegramId: body.telegramId,
@@ -44,6 +53,10 @@ export const createIssue = async (body: PostIssue): Promise<void> => {
   return response.data;
 };
 
+export const getIssue = async (id: number): Promise<Issue> => {
+  const response = await api.get(`/Issues/GetIssueById?Id=${id}`);
+  return response.data;
+};
 export const getRepetitionPlanForMonth = async (
   userId: number,
   date: string

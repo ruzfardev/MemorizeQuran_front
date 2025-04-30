@@ -1,17 +1,43 @@
-import { Box, Card, Flex, Image, ScrollArea, Text, Title } from "@mantine/core";
+import {
+  Box,
+  Card,
+  Flex,
+  Image,
+  Loader,
+  ScrollArea,
+  Text,
+  Title,
+} from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import { useUnit } from "effector-react";
-import { $allIssues, $allSurahs, $currentUser } from "@/shared/state";
+import {
+  $allIssues,
+  $allSurahs,
+  $currentUser,
+  $isUserRegisterInProgress,
+  $telegramId,
+} from "@/shared/state";
 import { Icon, StarBadge } from "@/shared/ui";
 import { useEffect } from "react";
 import { $isLoading, pageMounted } from "../model";
 import heroImg from "../../../assets/image-2.png";
+import qr from "../../../assets/qr.png";
+import WebApp from "@twa-dev/sdk";
 const Page = () => {
-  const [user, allIssues, allSurahs, isLoading] = useUnit([
+  const [
+    user,
+    telegramId,
+    allIssues,
+    allSurahs,
+    isLoading,
+    isUserRegisterInProgress,
+  ] = useUnit([
     $currentUser,
+    $telegramId,
     $allIssues,
     $allSurahs,
     $isLoading,
+    $isUserRegisterInProgress,
   ]);
 
   const [mountPage] = useUnit([pageMounted]);
@@ -21,6 +47,47 @@ const Page = () => {
       mountPage(user.userId);
     }
   }, [user]);
+
+  if (isUserRegisterInProgress) {
+    return (
+      <Flex
+        bg="var(--mantine-primary-color-light)"
+        h="100vh"
+        direction="column"
+        justify="center"
+        align="center"
+      >
+        <Loader />
+      </Flex>
+    );
+  }
+
+  if (!telegramId) {
+    // Detect if user is on mobile
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    // Create appropriate link based on device
+    const telegramLink = isMobile
+      ? `tg://resolve?domain=Easy_Memorize_Quran_Bot&start=${telegramId || ""}`
+      : `https://t.me/Easy_Memorize_Quran_Bot?start=${telegramId || ""}`;
+
+    return (
+      <Flex
+        bg="var(--mantine-primary-color-light)"
+        h="100vh"
+        direction="column"
+        justify="center"
+        align="center"
+      >
+        <Image src={qr} w={200} />
+        <Text ta="center" p={4}>
+          You are not connected as a Telegram user.
+          <br />
+          Please open this bot in <a href={telegramLink}>Telegram</a>.
+        </Text>
+      </Flex>
+    );
+  }
 
   return (
     <Flex
@@ -45,7 +112,7 @@ const Page = () => {
         >
           <Flex direction="column" mt="auto">
             <Title order={2} mb={40}>
-              Easy Memorize Quran
+              Assalomu aleykum, <br /> {WebApp.initDataUnsafe?.user?.first_name}
             </Title>
             <Carousel
               slideSize="90%"

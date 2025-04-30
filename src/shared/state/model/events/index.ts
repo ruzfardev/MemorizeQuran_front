@@ -1,6 +1,6 @@
 import { createEvent } from "effector";
 import { Location, NavigateFunction } from "react-router";
-import { NavigateEventPayload } from "./types";
+import { NavigateEventPayload } from "../types";
 
 export const appInitialized = createEvent();
 export const userNotFound = createEvent<{

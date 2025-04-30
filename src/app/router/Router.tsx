@@ -8,7 +8,6 @@ import {
 import { Home } from "@/pages/home";
 import { Tasks } from "@/pages/tasks";
 import { Learn } from "@/pages/learn";
-import { NotRegisteredPage } from "@/pages/not-registered";
 import { Layout } from "./ui/layout";
 import { FormLayout } from "./ui/layout/FormLayout";
 import { useUnit } from "effector-react";
@@ -24,15 +23,13 @@ export const Router = () => {
   return (
     <Routes>
       <Route path="" element={<InitApp />}>
-        <Route
-          path={NotRegisteredPage.route}
-          element={<NotRegisteredPage.component />}
-        />
         <Route element={<Layout />}>
           <Route path={Home.route} element={<Home.component />} />
           <Route element={<FormLayout />}>
             <Route path={Tasks.route} element={<Tasks.component />} />
-            <Route path={Learn.route} element={<Learn.component />} />
+            <Route path={Learn.route} element={<Learn.component />}>
+              <Route path=":taskId" element={<Learn.component />} />
+            </Route>
           </Route>
           <Route
             path="*"

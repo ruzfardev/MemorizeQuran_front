@@ -1,8 +1,8 @@
-import { getAllIssues, getAllSurahs, getUser, postUser } from "@/shared/api";
+import { getAllIssues, getAllSurahs } from "@/shared/api";
 import { attach, createEffect } from "effector";
-import { $location, $navigate } from "./stores";
-import { NavigateFxPayload, NavigateParams } from "./types";
-import { resolveUrl } from "./lib";
+import { $location, $navigate } from "../stores";
+import { NavigateFxPayload, NavigateParams } from "../types";
+import { resolveUrl } from "../lib";
 export const navigateFx = attach({
   source: { navigate: $navigate, location: $location },
   mapParams: (params: NavigateParams, { navigate, location }) => ({
@@ -29,14 +29,6 @@ export const navigateFx = attach({
       return navigate(to, options);
     }
   ),
-});
-
-export const getUserFx = createEffect((id: number) => {
-  return getUser(id);
-});
-
-export const postUserFx = createEffect((body: any) => {
-  return postUser(body);
 });
 
 //* Other effects
